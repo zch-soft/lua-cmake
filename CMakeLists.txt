@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.21.0)
 project(
   lua
-  VERSION 0.1.0
+  VERSION 5.4.7
   LANGUAGES C)
 
 set(lua_defines)
@@ -124,5 +124,12 @@ if(LUA_EXE)
     target_link_libraries(lua_exe PUBLIC ${MATH_LIBRARY})
   endif(MATH_LIBRARY)
 endif(LUA_EXE)
+
+include(GNUInstallDirs)
+message("CMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}")
+message("CMAKE_INSTALL_INCLUDEDIR=${CMAKE_INSTALL_INCLUDEDIR}")
+install(TARGETS lua_lib)
+install(TARGETS lua_exe)
+install(FILES lua.h lualib.h lauxlib.h luaconf.h DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/lua)
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/create_clangd.cmake)
