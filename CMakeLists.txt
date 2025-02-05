@@ -112,7 +112,7 @@ add_library(lua_lib STATIC ${CORE_FILES} ${AUX_FILES} ${LIB_FILES})
 target_include_directories(lua_lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 set_property(TARGET lua_lib PROPERTY C_STANDARD 99)
-set_target_properties(lua_lib PROPERTIES OUTPUT_NAME "lua")
+set_target_properties(lua_lib PROPERTIES OUTPUT_NAME "lua${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}")
 
 if(LUA_EXE)
   add_executable(lua_exe ${EXE_FILES})
@@ -130,6 +130,6 @@ message("CMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}")
 message("CMAKE_INSTALL_INCLUDEDIR=${CMAKE_INSTALL_INCLUDEDIR}")
 install(TARGETS lua_lib)
 install(TARGETS lua_exe)
-install(FILES lua.h lualib.h lauxlib.h luaconf.h DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/lua)
+install(FILES lua.h lualib.h lauxlib.h luaconf.h DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/lua/${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR})
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/create_clangd.cmake)
